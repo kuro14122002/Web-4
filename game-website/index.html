@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Echoes of Eternity | An Epic Adventure Game</title>
+  <meta name="description" content="Embark on an epic journey in Echoes of Eternity, an immersive open-world RPG with captivating story and stunning visuals.">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css">
+  
+  <style>
+    /* Message for missing images */
+    .image-notice {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      z-index: 9999;
+      font-family: var(--font-body);
+    }
+    .image-notice a {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <!-- Notice about missing images -->
+  <div class="image-notice">
+    Note: This template requires image assets for proper display. Placeholder images would need to be added to the images directory.
+    <a href="#" onclick="this.parentNode.style.display='none'; return false;">Dismiss</a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <img src="images/logo.png" alt="Echoes of Eternity Logo">
+          <span>Echoes of Eternity</span>
+        </a>
+        
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="#home" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="#features" class="nav-link">Features</a></li>
+            <li class="nav-item"><a href="#characters" class="nav-link">Characters</a></li>
+            <li class="nav-item"><a href="#world" class="nav-link">World</a></li>
+            <li class="nav-item"><a href="#gameplay" class="nav-link">Gameplay</a></li>
+            <li class="nav-item"><a href="pages/news.html" class="nav-link">News</a></li>
+            <li class="nav-item"><a href="pages/gallery.html" class="nav-link">Gallery</a></li>
+          </ul>
+        </nav>
+        
+        <div class="mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <img src="images/hero-bg.jpg" alt="Echoes of Eternity Background" class="hero-bg">
+    
+    <div class="parallax">
+      <div class="parallax-layer" data-depth="0.2" style="background-image: url('images/parallax-1.png');"></div>
+      <div class="parallax-layer" data-depth="0.4" style="background-image: url('images/parallax-2.png');"></div>
+      <div class="parallax-layer" data-depth="0.6" style="background-image: url('images/parallax-3.png');"></div>
+    </div>
+    
+    <div class="hero-content">
+      <h1 class="hero-title">Echoes of Eternity</h1>
+      <p class="hero-subtitle">Embark on an epic journey through a world of mystery and adventure</p>
+      <div class="hero-btns">
+        <a href="#" class="btn btn-primary">Play Now</a>
+        <a href="#" class="btn btn-outline">Watch Trailer</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Features Section -->
+  <section id="features" class="features section">
+    <div class="container">
+      <h2 class="section-title">Game Features</h2>
+      <p class="section-subtitle">Discover what makes Echoes of Eternity a unique gaming experience</p>
+      
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-globe"></i>
+          </div>
+          <h3 class="feature-title">Open World</h3>
+          <p class="feature-text">Explore a vast, seamless open world filled with secrets to discover and mysteries to unravel.</p>
+          <a href="#" class="btn btn-outline">Learn More</a>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <h3 class="feature-title">Deep Characters</h3>
+          <p class="feature-text">Encounter unique characters with rich backstories and complex motivations.</p>
+          <a href="#" class="btn btn-outline">Learn More</a>
+        </div>
+        
+        <div class="feature-card">
+          <div class="feature-icon">
+            <i class="fas fa-gamepad"></i>
+          </div>
+          <h3 class="feature-title">Immersive Combat</h3>
+          <p class="feature-text">Experience fluid, dynamic combat with deep customization and tactical options.</p>
+          <a href="#" class="btn btn-outline">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Characters Section -->
+  <section id="characters" class="characters section">
+    <div class="container">
+      <h2 class="section-title">Meet The Characters</h2>
+      <p class="section-subtitle">Discover the heroes who will join you on your journey</p>
+      
+      <div class="characters-slider">
+        <div class="character-card">
+          <img src="images/character-1.jpg" alt="Aria" class="character-image">
+          <div class="character-info">
+            <h3 class="character-name">Aria</h3>
+            <p class="character-role">The Awakened</p>
+            <p class="character-desc">A mysterious warrior with forgotten memories who holds the key to saving the world.</p>
+            <a href="#" class="btn btn-outline">View Profile</a>
+          </div>
+        </div>
+        
+        <div class="character-card">
+          <img src="images/character-2.jpg" alt="Lyra" class="character-image">
+          <div class="character-info">
+            <h3 class="character-name">Lyra</h3>
+            <p class="character-role">The Oracle</p>
+            <p class="character-desc">A gifted seer with the power to glimpse the threads of fate.</p>
+            <a href="#" class="btn btn-outline">View Profile</a>
+          </div>
+        </div>
+        
+        <div class="character-card">
+          <img src="images/character-3.jpg" alt="Kairo" class="character-image">
+          <div class="character-info">
+            <h3 class="character-name">Kairo</h3>
+            <p class="character-role">The Guardian</p>
+            <p class="character-desc">A steadfast protector who has sworn to defend the innocent at any cost.</p>
+            <a href="#" class="btn btn-outline">View Profile</a>
+          </div>
+        </div>
+        
+        <div class="character-card">
+          <img src="images/character-4.jpg" alt="Zephyr" class="character-image">
+          <div class="character-info">
+            <h3 class="character-name">Zephyr</h3>
+            <p class="character-role">The Trickster</p>
+            <p class="character-desc">A nimble rogue with a knack for getting in and out of trouble.</p>
+            <a href="#" class="btn btn-outline">View Profile</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- World Section -->
+  <section id="world" class="world section">
+    <div class="container">
+      <h2 class="section-title">Explore The World</h2>
+      <p class="section-subtitle">Journey through breathtaking landscapes and ancient ruins</p>
+      
+      <div class="world-content">
+        <div class="world-text">
+          <h3>The Shattered Realm</h3>
+          <p>Venture into a world fractured by an ancient cataclysm, where floating islands drift through an endless sky and the laws of nature have been forever altered.</p>
+          <p>Each region offers unique challenges and mysteries, from the crystalline forests of Lumeria to the storm-wracked Tempest Isles.</p>
+          <a href="#" class="btn btn-primary">Discover More</a>
+        </div>
+        
+        <div class="world-image">
+          <img src="images/world.jpg" alt="The Shattered Realm">
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Gameplay Section -->
+  <section id="gameplay" class="gameplay section">
+    <div class="container">
+      <h2 class="section-title">Gameplay</h2>
+      <p class="section-subtitle">Watch Echoes of Eternity in action</p>
+      
+      <div class="video-container">
+        <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Echoes of Eternity Gameplay Trailer" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Newsletter Section -->
+  <section class="newsletter">
+    <div class="container">
+      <div class="newsletter-content">
+        <h2 class="newsletter-title">Stay Updated</h2>
+        <p class="newsletter-text">Subscribe to our newsletter to receive the latest news and updates about Echoes of Eternity.</p>
+        
+        <form class="newsletter-form">
+          <input type="email" class="newsletter-input" placeholder="Enter your email address" required>
+          <button type="submit" class="newsletter-btn">Subscribe</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-info">
+          <h3 class="footer-logo">Echoes of Eternity</h3>
+          <p class="footer-text">An immersive open-world RPG that takes you on an unforgettable journey through a broken world.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links-wrapper">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#home">Home</a></li>
+            <li class="footer-link"><a href="#features">Features</a></li>
+            <li class="footer-link"><a href="#characters">Characters</a></li>
+            <li class="footer-link"><a href="#world">World</a></li>
+            <li class="footer-link"><a href="#gameplay">Gameplay</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-wrapper">
+          <h3 class="footer-title">Support</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">FAQ</a></li>
+            <li class="footer-link"><a href="#">Help Center</a></li>
+            <li class="footer-link"><a href="#">System Requirements</a></li>
+            <li class="footer-link"><a href="#">Community</a></li>
+            <li class="footer-link"><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-wrapper">
+          <h3 class="footer-title">Legal</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">Terms of Service</a></li>
+            <li class="footer-link"><a href="#">Privacy Policy</a></li>
+            <li class="footer-link"><a href="#">Cookie Policy</a></li>
+            <li class="footer-link"><a href="#">EULA</a></li>
+            <li class="footer-link"><a href="#">Press Kit</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2023 Echoes of Eternity. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script src="js/main.js"></script>
+</body>
+</html> 

@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gallery | Echoes of Eternity</title>
+  <meta name="description" content="Explore stunning visuals and screenshots from Echoes of Eternity, an immersive open-world RPG.">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* Gallery Page Specific Styles */
+    .gallery-hero {
+      height: 50vh;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/gallery-banner.jpg');
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .gallery-hero-content {
+      max-width: 80rem;
+      padding: 0 2rem;
+    }
+    
+    .gallery-filter {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin: 4rem 0;
+    }
+    
+    .filter-btn {
+      padding: 0.8rem 2rem;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--light-text);
+      border-radius: 3rem;
+      font-family: var(--font-primary);
+      cursor: pointer;
+      transition: all var(--transition-fast) ease;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background-color: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+    
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+      gap: 2rem;
+      margin-bottom: 4rem;
+    }
+    
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 1rem;
+      cursor: pointer;
+      height: 25rem;
+      transition: all var(--transition-medium) ease;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 0.8s ease forwards;
+    }
+    
+    .gallery-item:nth-child(2) { animation-delay: 0.1s; }
+    .gallery-item:nth-child(3) { animation-delay: 0.2s; }
+    .gallery-item:nth-child(4) { animation-delay: 0.3s; }
+    .gallery-item:nth-child(5) { animation-delay: 0.4s; }
+    .gallery-item:nth-child(6) { animation-delay: 0.5s; }
+    
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-medium) ease;
+    }
+    
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    
+    .gallery-item-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 2rem;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all var(--transition-medium) ease;
+    }
+    
+    .gallery-item:hover .gallery-item-overlay {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .gallery-item-title {
+      font-family: var(--font-primary);
+      font-size: 1.8rem;
+      color: var(--light-text);
+      margin-bottom: 0.5rem;
+    }
+    
+    .gallery-item-category {
+      font-size: 1.4rem;
+      color: var(--accent-color);
+    }
+    
+    /* Lightbox Styles */
+    .lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.9);
+      z-index: 2000;
+      display: none;
+      opacity: 0;
+      transition: opacity var(--transition-medium) ease;
+    }
+    
+    .lightbox.active {
+      display: flex;
+      opacity: 1;
+    }
+    
+    .lightbox-content {
+      position: relative;
+      margin: auto;
+      width: 80%;
+      max-width: 120rem;
+      height: 80%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .lightbox-img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+    }
+    
+    .lightbox-close {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      color: var(--light-text);
+      font-size: 3rem;
+      cursor: pointer;
+      transition: color var(--transition-fast) ease;
+    }
+    
+    .lightbox-close:hover {
+      color: var(--primary-color);
+    }
+    
+    .lightbox-prev, .lightbox-next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--light-text);
+      font-size: 3rem;
+      cursor: pointer;
+      transition: all var(--transition-fast) ease;
+      background-color: rgba(0, 0, 0, 0.5);
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .lightbox-prev {
+      left: 2rem;
+    }
+    
+    .lightbox-next {
+      right: 2rem;
+    }
+    
+    .lightbox-prev:hover, .lightbox-next:hover {
+      background-color: var(--primary-color);
+    }
+    
+    .lightbox-caption {
+      position: absolute;
+      bottom: -40px;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      color: var(--light-text);
+      font-family: var(--font-primary);
+      font-size: 1.8rem;
+    }
+    
+    .load-more {
+      display: block;
+      margin: 0 auto 6rem;
+      padding: 1.2rem 4rem;
+    }
+    
+    @media (max-width: 768px) {
+      .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(25rem, 1fr));
+      }
+      
+      .lightbox-content {
+        width: 90%;
+      }
+      
+      .lightbox-prev, .lightbox-next {
+        width: 4rem;
+        height: 4rem;
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo">
+          <img src="../images/logo.png" alt="Echoes of Eternity Logo">
+          <span>Echoes of Eternity</span>
+        </a>
+        
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="../index.html#features" class="nav-link">Features</a></li>
+            <li class="nav-item"><a href="../index.html#characters" class="nav-link">Characters</a></li>
+            <li class="nav-item"><a href="../index.html#world" class="nav-link">World</a></li>
+            <li class="nav-item"><a href="../index.html#gameplay" class="nav-link">Gameplay</a></li>
+            <li class="nav-item"><a href="news.html" class="nav-link">News</a></li>
+            <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+          </ul>
+        </nav>
+        
+        <div class="mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Gallery Hero -->
+  <section class="gallery-hero">
+    <div class="gallery-hero-content">
+      <h1 class="hero-title">Gallery</h1>
+      <p class="hero-subtitle">Explore the stunning visuals of Echoes of Eternity</p>
+    </div>
+  </section>
+  
+  <!-- Gallery Section -->
+  <section class="section">
+    <div class="container">
+      <div class="gallery-filter">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="character">Characters</button>
+        <button class="filter-btn" data-filter="landscape">Landscapes</button>
+        <button class="filter-btn" data-filter="concept">Concept Art</button>
+        <button class="filter-btn" data-filter="screenshot">Screenshots</button>
+      </div>
+      
+      <div class="gallery-grid">
+        <div class="gallery-item" data-category="landscape">
+          <img src="../images/gallery/landscape-1.jpg" alt="Crystal Valley" data-title="Crystal Valley" data-category="landscape">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">Crystal Valley</h3>
+            <p class="gallery-item-category">Landscape</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="character">
+          <img src="../images/gallery/character-1.jpg" alt="Aria - The Awakened" data-title="Aria - The Awakened" data-category="character">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">Aria - The Awakened</h3>
+            <p class="gallery-item-category">Character</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="screenshot">
+          <img src="../images/gallery/screenshot-1.jpg" alt="Battling the Ancient Guardian" data-title="Battling the Ancient Guardian" data-category="screenshot">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">Battling the Ancient Guardian</h3>
+            <p class="gallery-item-category">Screenshot</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="concept">
+          <img src="../images/gallery/concept-1.jpg" alt="Sky Temple Concept" data-title="Sky Temple Concept" data-category="concept">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">Sky Temple Concept</h3>
+            <p class="gallery-item-category">Concept Art</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="landscape">
+          <img src="../images/gallery/landscape-2.jpg" alt="The Floating Islands" data-title="The Floating Islands" data-category="landscape">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">The Floating Islands</h3>
+            <p class="gallery-item-category">Landscape</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="character">
+          <img src="../images/gallery/character-2.jpg" alt="Kairo - The Guardian" data-title="Kairo - The Guardian" data-category="character">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">Kairo - The Guardian</h3>
+            <p class="gallery-item-category">Character</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="screenshot">
+          <img src="../images/gallery/screenshot-2.jpg" alt="Exploring Ancient Ruins" data-title="Exploring Ancient Ruins" data-category="screenshot">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">Exploring Ancient Ruins</h3>
+            <p class="gallery-item-category">Screenshot</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="concept">
+          <img src="../images/gallery/concept-2.jpg" alt="Weapon Design Concepts" data-title="Weapon Design Concepts" data-category="concept">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">Weapon Design Concepts</h3>
+            <p class="gallery-item-category">Concept Art</p>
+          </div>
+        </div>
+        
+        <div class="gallery-item" data-category="landscape">
+          <img src="../images/gallery/landscape-3.jpg" alt="Storm Peaks" data-title="Storm Peaks" data-category="landscape">
+          <div class="gallery-item-overlay">
+            <h3 class="gallery-item-title">Storm Peaks</h3>
+            <p class="gallery-item-category">Landscape</p>
+          </div>
+        </div>
+      </div>
+      
+      <button class="btn btn-primary load-more">Load More</button>
+    </div>
+  </section>
+  
+  <!-- Lightbox -->
+  <div class="lightbox">
+    <div class="lightbox-content">
+      <img class="lightbox-img" src="" alt="">
+      <div class="lightbox-close">&times;</div>
+      <div class="lightbox-prev"><i class="fas fa-chevron-left"></i></div>
+      <div class="lightbox-next"><i class="fas fa-chevron-right"></i></div>
+      <div class="lightbox-caption"></div>
+    </div>
+  </div>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-info">
+          <h3 class="footer-logo">Echoes of Eternity</h3>
+          <p class="footer-text">An immersive open-world RPG that takes you on an unforgettable journey through a broken world.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links-wrapper">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="../index.html">Home</a></li>
+            <li class="footer-link"><a href="../index.html#features">Features</a></li>
+            <li class="footer-link"><a href="../index.html#characters">Characters</a></li>
+            <li class="footer-link"><a href="../index.html#world">World</a></li>
+            <li class="footer-link"><a href="../index.html#gameplay">Gameplay</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-wrapper">
+          <h3 class="footer-title">Support</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">FAQ</a></li>
+            <li class="footer-link"><a href="#">Help Center</a></li>
+            <li class="footer-link"><a href="#">System Requirements</a></li>
+            <li class="footer-link"><a href="#">Community</a></li>
+            <li class="footer-link"><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-wrapper">
+          <h3 class="footer-title">Legal</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">Terms of Service</a></li>
+            <li class="footer-link"><a href="#">Privacy Policy</a></li>
+            <li class="footer-link"><a href="#">Cookie Policy</a></li>
+            <li class="footer-link"><a href="#">EULA</a></li>
+            <li class="footer-link"><a href="#">Press Kit</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2023 Echoes of Eternity. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Gallery Filtering
+      const filterBtns = document.querySelectorAll('.filter-btn');
+      const galleryItems = document.querySelectorAll('.gallery-item');
+      
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          // Remove active class from all buttons
+          filterBtns.forEach(btn => btn.classList.remove('active'));
+          
+          // Add active class to clicked button
+          this.classList.add('active');
+          
+          // Get filter value
+          const filterValue = this.getAttribute('data-filter');
+          
+          // Filter gallery items
+          galleryItems.forEach(item => {
+            const itemCategory = item.getAttribute('data-category');
+            
+            if (filterValue === 'all' || filterValue === itemCategory) {
+              item.style.display = 'block';
+              setTimeout(() => {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+              }, 100);
+            } else {
+              item.style.opacity = '0';
+              item.style.transform = 'translateY(20px)';
+              setTimeout(() => {
+                item.style.display = 'none';
+              }, 500);
+            }
+          });
+        });
+      });
+      
+      // Lightbox Functionality
+      const lightbox = document.querySelector('.lightbox');
+      const lightboxImg = document.querySelector('.lightbox-img');
+      const lightboxCaption = document.querySelector('.lightbox-caption');
+      const lightboxClose = document.querySelector('.lightbox-close');
+      const lightboxPrev = document.querySelector('.lightbox-prev');
+      const lightboxNext = document.querySelector('.lightbox-next');
+      
+      let currentIndex = 0;
+      const galleryImages = [];
+      
+      // Populate gallery images array
+      galleryItems.forEach(item => {
+        const img = item.querySelector('img');
+        galleryImages.push({
+          src: img.getAttribute('src'),
+          title: img.getAttribute('data-title'),
+          category: img.getAttribute('data-category')
+        });
+      });
+      
+      // Open lightbox
+      galleryItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+          currentIndex = index;
+          updateLightbox();
+          lightbox.classList.add('active');
+          document.body.style.overflow = 'hidden'; // Prevent scrolling
+        });
+      });
+      
+      // Update lightbox content
+      function updateLightbox() {
+        const current = galleryImages[currentIndex];
+        lightboxImg.src = current.src;
+        lightboxImg.alt = current.title;
+        lightboxCaption.textContent = `${current.title} - ${current.category}`;
+      }
+      
+      // Close lightbox
+      lightboxClose.addEventListener('click', () => {
+        lightbox.classList.remove('active');
+        document.body.style.overflow = ''; // Restore scrolling
+      });
+      
+      // Click outside to close
+      lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+          lightbox.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+      });
+      
+      // Previous image
+      lightboxPrev.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+        updateLightbox();
+      });
+      
+      // Next image
+      lightboxNext.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % galleryImages.length;
+        updateLightbox();
+      });
+      
+      // Keyboard navigation
+      document.addEventListener('keydown', (e) => {
+        if (!lightbox.classList.contains('active')) return;
+        
+        if (e.key === 'Escape') {
+          lightbox.classList.remove('active');
+          document.body.style.overflow = '';
+        } else if (e.key === 'ArrowLeft') {
+          currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+          updateLightbox();
+        } else if (e.key === 'ArrowRight') {
+          currentIndex = (currentIndex + 1) % galleryImages.length;
+          updateLightbox();
+        }
+      });
+      
+      // Load more functionality (simulation)
+      const loadMoreBtn = document.querySelector('.load-more');
+      let isLoading = false;
+      
+      loadMoreBtn.addEventListener('click', () => {
+        if (isLoading) return;
+        
+        isLoading = true;
+        loadMoreBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+        
+        // Simulate loading delay
+        setTimeout(() => {
+          loadMoreBtn.innerHTML = 'Load More';
+          loadMoreBtn.style.opacity = '0.5';
+          loadMoreBtn.style.pointerEvents = 'none';
+          
+          // Add a message after the button
+          const message = document.createElement('p');
+          message.textContent = 'No more images to load.';
+          message.style.textAlign = 'center';
+          message.style.color = 'var(--light-text-secondary)';
+          message.style.marginTop = '2rem';
+          
+          loadMoreBtn.parentNode.insertBefore(message, loadMoreBtn.nextSibling);
+          
+          isLoading = false;
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html> 

@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>News | Echoes of Eternity</title>
+  <meta name="description" content="Stay updated with the latest news, updates and events for Echoes of Eternity, an immersive open-world RPG.">
+  
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="../images/favicon.ico" type="image/x-icon">
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="../css/style.css">
+  <style>
+    /* News Page Specific Styles */
+    .news-hero {
+      height: 50vh;
+      min-height: 400px;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('../images/news-banner.jpg');
+      background-position: center;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    
+    .news-hero-content {
+      max-width: 80rem;
+      padding: 0 2rem;
+    }
+    
+    .news-container {
+      display: grid;
+      grid-template-columns: 3fr 1fr;
+      gap: 4rem;
+    }
+    
+    .news-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
+    
+    .news-article {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1rem;
+      overflow: hidden;
+      transition: all var(--transition-medium) ease;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .news-article:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-large);
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    .news-article-image {
+      width: 100%;
+      height: 30rem;
+      overflow: hidden;
+    }
+    
+    .news-article-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform var(--transition-medium) ease;
+    }
+    
+    .news-article:hover .news-article-image img {
+      transform: scale(1.05);
+    }
+    
+    .news-article-content {
+      padding: 2.5rem;
+    }
+    
+    .news-article-meta {
+      display: flex;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      color: var(--light-text-secondary);
+      font-size: 1.4rem;
+    }
+    
+    .news-article-meta span {
+      display: flex;
+      align-items: center;
+    }
+    
+    .news-article-meta i {
+      margin-right: 0.5rem;
+      color: var(--accent-color);
+    }
+    
+    .news-article-title {
+      font-family: var(--font-secondary);
+      font-size: 2.4rem;
+      margin-bottom: 1.5rem;
+      color: var(--light-text);
+    }
+    
+    .news-article-excerpt {
+      color: var(--light-text-secondary);
+      margin-bottom: 2rem;
+    }
+    
+    .news-sidebar {
+      position: sticky;
+      top: 10rem;
+      align-self: start;
+    }
+    
+    .sidebar-widget {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 1rem;
+      padding: 2.5rem;
+      margin-bottom: 3rem;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .sidebar-widget-title {
+      font-family: var(--font-primary);
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: var(--light-text);
+      position: relative;
+      padding-bottom: 1rem;
+    }
+    
+    .sidebar-widget-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 5rem;
+      height: 2px;
+      background: var(--gradient-accent);
+    }
+    
+    .categories-list {
+      list-style: none;
+    }
+    
+    .categories-item {
+      margin-bottom: 1rem;
+    }
+    
+    .categories-item a {
+      display: flex;
+      justify-content: space-between;
+      color: var(--light-text-secondary);
+      transition: all var(--transition-fast) ease;
+      padding: 0.5rem 0;
+    }
+    
+    .categories-item a:hover {
+      color: var(--accent-color);
+      padding-left: 0.5rem;
+    }
+    
+    .categories-count {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-radius: 2rem;
+      padding: 0.2rem 1rem;
+      font-size: 1.2rem;
+      color: var(--accent-color);
+    }
+    
+    .recent-post {
+      display: flex;
+      margin-bottom: 2rem;
+    }
+    
+    .recent-post-image {
+      flex: 0 0 8rem;
+      height: 8rem;
+      border-radius: 0.5rem;
+      overflow: hidden;
+      margin-right: 1.5rem;
+    }
+    
+    .recent-post-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .recent-post-content {
+      flex: 1;
+    }
+    
+    .recent-post-title {
+      font-family: var(--font-primary);
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
+    
+    .recent-post-title a {
+      color: var(--light-text);
+      transition: color var(--transition-fast) ease;
+    }
+    
+    .recent-post-title a:hover {
+      color: var(--accent-color);
+    }
+    
+    .recent-post-date {
+      font-size: 1.2rem;
+      color: var(--light-text-secondary);
+    }
+    
+    .pagination {
+      display: flex;
+      justify-content: center;
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+    }
+    
+    .pagination-item {
+      width: 4rem;
+      height: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 0.5rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--light-text);
+      border-radius: 0.5rem;
+      font-family: var(--font-primary);
+      transition: all var(--transition-fast) ease;
+      cursor: pointer;
+    }
+    
+    .pagination-item:hover, .pagination-item.active {
+      background-color: var(--primary-color);
+    }
+    
+    .pagination-arrow {
+      width: 4rem;
+      height: 4rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 0.5rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--light-text);
+      border-radius: 0.5rem;
+      transition: all var(--transition-fast) ease;
+      cursor: pointer;
+    }
+    
+    .pagination-arrow:hover {
+      background-color: var(--primary-color);
+    }
+    
+    .pagination-arrow.disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    
+    .search-form {
+      display: flex;
+      margin-bottom: 2rem;
+    }
+    
+    .search-input {
+      flex: 1;
+      padding: 1.2rem 1.5rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--light-text);
+      border-radius: 0.4rem 0 0 0.4rem;
+      font-family: var(--font-body);
+      font-size: 1.5rem;
+    }
+    
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+    }
+    
+    .search-btn {
+      width: 5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--primary-color);
+      border: none;
+      border-radius: 0 0.4rem 0.4rem 0;
+      color: var(--light-text);
+      cursor: pointer;
+      transition: background-color var(--transition-fast) ease;
+    }
+    
+    .search-btn:hover {
+      background-color: var(--secondary-color);
+    }
+    
+    .tags-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    
+    .tag-item {
+      padding: 0.5rem 1.5rem;
+      background-color: rgba(255, 255, 255, 0.05);
+      color: var(--light-text-secondary);
+      border-radius: 2rem;
+      font-size: 1.3rem;
+      transition: all var(--transition-fast) ease;
+    }
+    
+    .tag-item:hover {
+      background-color: var(--primary-color);
+      color: var(--light-text);
+      transform: translateY(-2px);
+    }
+    
+    /* Image Notice */
+    .image-notice {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      z-index: 9999;
+      font-family: var(--font-body);
+    }
+    .image-notice a {
+      color: var(--accent-color);
+      text-decoration: underline;
+    }
+    
+    @media (max-width: 992px) {
+      .news-container {
+        grid-template-columns: 1fr;
+      }
+      
+      .news-sidebar {
+        position: static;
+      }
+    }
+    
+    @media (max-width: 576px) {
+      .news-article-image {
+        height: 20rem;
+      }
+      
+      .news-article-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Notice about missing images -->
+  <div class="image-notice">
+    Note: This template requires image assets for proper display. Placeholder images would need to be added to the images directory.
+    <a href="#" onclick="this.parentNode.style.display='none'; return false;">Dismiss</a>
+  </div>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="container">
+      <div class="header-inner">
+        <a href="../index.html" class="logo">
+          <img src="../images/logo.png" alt="Echoes of Eternity Logo">
+          <span>Echoes of Eternity</span>
+        </a>
+        
+        <nav>
+          <ul class="nav-menu">
+            <li class="nav-item"><a href="../index.html" class="nav-link">Home</a></li>
+            <li class="nav-item"><a href="../index.html#features" class="nav-link">Features</a></li>
+            <li class="nav-item"><a href="../index.html#characters" class="nav-link">Characters</a></li>
+            <li class="nav-item"><a href="../index.html#world" class="nav-link">World</a></li>
+            <li class="nav-item"><a href="../index.html#gameplay" class="nav-link">Gameplay</a></li>
+            <li class="nav-item"><a href="news.html" class="nav-link">News</a></li>
+            <li class="nav-item"><a href="gallery.html" class="nav-link">Gallery</a></li>
+          </ul>
+        </nav>
+        
+        <div class="mobile-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- News Hero -->
+  <section class="news-hero">
+    <div class="news-hero-content">
+      <h1 class="hero-title">Latest News</h1>
+      <p class="hero-subtitle">Stay updated on the Echoes of Eternity universe</p>
+    </div>
+  </section>
+  
+  <!-- News Section -->
+  <section class="section">
+    <div class="container">
+      <div class="news-container">
+        <div class="news-grid">
+          <!-- News Article 1 -->
+          <article class="news-article">
+            <div class="news-article-image">
+              <img src="../images/news-1.jpg" alt="New Character Reveal">
+            </div>
+            <div class="news-article-content">
+              <div class="news-article-meta">
+                <span><i class="far fa-calendar"></i> March 25, 2023</span>
+                <span><i class="far fa-user"></i> Dev Team</span>
+                <span><i class="far fa-folder"></i> Announcements</span>
+              </div>
+              <h3 class="news-article-title">New Character Reveal: Meet Lyra, The Oracle</h3>
+              <p class="news-article-excerpt">We're excited to reveal the newest addition to the Echoes of Eternity roster. Lyra, The Oracle, brings unique divination abilities that will change how players approach combat and exploration. Read on to learn more about her backstory and gameplay mechanics.</p>
+              <a href="#" class="btn btn-outline">Read More</a>
+            </div>
+          </article>
+          
+          <!-- News Article 2 -->
+          <article class="news-article">
+            <div class="news-article-image">
+              <img src="../images/news-2.jpg" alt="Early Access Announcement">
+            </div>
+            <div class="news-article-content">
+              <div class="news-article-meta">
+                <span><i class="far fa-calendar"></i> March 15, 2023</span>
+                <span><i class="far fa-user"></i> Game Director</span>
+                <span><i class="far fa-folder"></i> Development</span>
+              </div>
+              <h3 class="news-article-title">Early Access Release Date Announced</h3>
+              <p class="news-article-excerpt">Mark your calendars! Echoes of Eternity will be entering Early Access on June 15, 2023. Players will be able to explore the first three regions of the Shattered Realm, with more content being added throughout the Early Access period.</p>
+              <a href="#" class="btn btn-outline">Read More</a>
+            </div>
+          </article>
+          
+          <!-- News Article 3 -->
+          <article class="news-article">
+            <div class="news-article-image">
+              <img src="../images/news-3.jpg" alt="Gameplay Trailer">
+            </div>
+            <div class="news-article-content">
+              <div class="news-article-meta">
+                <span><i class="far fa-calendar"></i> March 5, 2023</span>
+                <span><i class="far fa-user"></i> Marketing Team</span>
+                <span><i class="far fa-folder"></i> Media</span>
+              </div>
+              <h3 class="news-article-title">New Gameplay Trailer Showcases Combat System</h3>
+              <p class="news-article-excerpt">Our latest gameplay trailer is here, showcasing the dynamic combat system in Echoes of Eternity. Watch as Aria and Kairo team up to take down one of the game's fearsome bosses, the Ancient Guardian of the Crystal Valley.</p>
+              <a href="#" class="btn btn-outline">Read More</a>
+            </div>
+          </article>
+          
+          <!-- News Article 4 -->
+          <article class="news-article">
+            <div class="news-article-image">
+              <img src="../images/news-4.jpg" alt="Dev Diary">
+            </div>
+            <div class="news-article-content">
+              <div class="news-article-meta">
+                <span><i class="far fa-calendar"></i> February 28, 2023</span>
+                <span><i class="far fa-user"></i> Lead Designer</span>
+                <span><i class="far fa-folder"></i> Dev Diary</span>
+              </div>
+              <h3 class="news-article-title">Dev Diary: Creating the World of Echoes of Eternity</h3>
+              <p class="news-article-excerpt">In our first developer diary, Lead Designer Sarah Chen takes us behind the scenes of world creation in Echoes of Eternity. Learn about the inspiration behind the floating islands of the Shattered Realm and how the team brings this unique setting to life.</p>
+              <a href="#" class="btn btn-outline">Read More</a>
+            </div>
+          </article>
+          
+          <!-- Pagination -->
+          <div class="pagination">
+            <a class="pagination-arrow disabled"><i class="fas fa-chevron-left"></i></a>
+            <a class="pagination-item active">1</a>
+            <a class="pagination-item">2</a>
+            <a class="pagination-item">3</a>
+            <a class="pagination-arrow"><i class="fas fa-chevron-right"></i></a>
+          </div>
+        </div>
+        
+        <!-- Sidebar -->
+        <aside class="news-sidebar">
+          <!-- Search Widget -->
+          <div class="sidebar-widget">
+            <h3 class="sidebar-widget-title">Search</h3>
+            <form class="search-form">
+              <input type="text" class="search-input" placeholder="Search...">
+              <button type="submit" class="search-btn"><i class="fas fa-search"></i></button>
+            </form>
+          </div>
+          
+          <!-- Categories Widget -->
+          <div class="sidebar-widget">
+            <h3 class="sidebar-widget-title">Categories</h3>
+            <ul class="categories-list">
+              <li class="categories-item">
+                <a href="#">
+                  <span>Announcements</span>
+                  <span class="categories-count">5</span>
+                </a>
+              </li>
+              <li class="categories-item">
+                <a href="#">
+                  <span>Development</span>
+                  <span class="categories-count">8</span>
+                </a>
+              </li>
+              <li class="categories-item">
+                <a href="#">
+                  <span>Media</span>
+                  <span class="categories-count">4</span>
+                </a>
+              </li>
+              <li class="categories-item">
+                <a href="#">
+                  <span>Dev Diary</span>
+                  <span class="categories-count">3</span>
+                </a>
+              </li>
+              <li class="categories-item">
+                <a href="#">
+                  <span>Community</span>
+                  <span class="categories-count">6</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+          
+          <!-- Recent Posts Widget -->
+          <div class="sidebar-widget">
+            <h3 class="sidebar-widget-title">Recent Posts</h3>
+            <div class="recent-posts">
+              <div class="recent-post">
+                <div class="recent-post-image">
+                  <img src="../images/recent-1.jpg" alt="Recent Post">
+                </div>
+                <div class="recent-post-content">
+                  <h4 class="recent-post-title">
+                    <a href="#">New Character Reveal: Meet Lyra, The Oracle</a>
+                  </h4>
+                  <span class="recent-post-date">March 25, 2023</span>
+                </div>
+              </div>
+              
+              <div class="recent-post">
+                <div class="recent-post-image">
+                  <img src="../images/recent-2.jpg" alt="Recent Post">
+                </div>
+                <div class="recent-post-content">
+                  <h4 class="recent-post-title">
+                    <a href="#">Early Access Release Date Announced</a>
+                  </h4>
+                  <span class="recent-post-date">March 15, 2023</span>
+                </div>
+              </div>
+              
+              <div class="recent-post">
+                <div class="recent-post-image">
+                  <img src="../images/recent-3.jpg" alt="Recent Post">
+                </div>
+                <div class="recent-post-content">
+                  <h4 class="recent-post-title">
+                    <a href="#">New Gameplay Trailer Showcases Combat System</a>
+                  </h4>
+                  <span class="recent-post-date">March 5, 2023</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Tags Widget -->
+          <div class="sidebar-widget">
+            <h3 class="sidebar-widget-title">Tags</h3>
+            <div class="tags-list">
+              <a href="#" class="tag-item">Gameplay</a>
+              <a href="#" class="tag-item">Characters</a>
+              <a href="#" class="tag-item">World</a>
+              <a href="#" class="tag-item">Story</a>
+              <a href="#" class="tag-item">Combat</a>
+              <a href="#" class="tag-item">Trailer</a>
+              <a href="#" class="tag-item">Development</a>
+              <a href="#" class="tag-item">Early Access</a>
+              <a href="#" class="tag-item">Features</a>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+  
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="footer-info">
+          <h3 class="footer-logo">Echoes of Eternity</h3>
+          <p class="footer-text">An immersive open-world RPG that takes you on an unforgettable journey through a broken world.</p>
+          <div class="social-links">
+            <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="social-link"><i class="fab fa-discord"></i></a>
+          </div>
+        </div>
+        
+        <div class="footer-links-wrapper">
+          <h3 class="footer-title">Quick Links</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="../index.html">Home</a></li>
+            <li class="footer-link"><a href="../index.html#features">Features</a></li>
+            <li class="footer-link"><a href="../index.html#characters">Characters</a></li>
+            <li class="footer-link"><a href="../index.html#world">World</a></li>
+            <li class="footer-link"><a href="../index.html#gameplay">Gameplay</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-wrapper">
+          <h3 class="footer-title">Support</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">FAQ</a></li>
+            <li class="footer-link"><a href="#">Help Center</a></li>
+            <li class="footer-link"><a href="#">System Requirements</a></li>
+            <li class="footer-link"><a href="#">Community</a></li>
+            <li class="footer-link"><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-links-wrapper">
+          <h3 class="footer-title">Legal</h3>
+          <ul class="footer-links">
+            <li class="footer-link"><a href="#">Terms of Service</a></li>
+            <li class="footer-link"><a href="#">Privacy Policy</a></li>
+            <li class="footer-link"><a href="#">Cookie Policy</a></li>
+            <li class="footer-link"><a href="#">EULA</a></li>
+            <li class="footer-link"><a href="#">Press Kit</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p class="copyright">&copy; 2023 Echoes of Eternity. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+  
+  <!-- JavaScript -->
+  <script src="../js/main.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Pagination Functionality (Placeholder)
+      const paginationItems = document.querySelectorAll('.pagination-item');
+      const paginationArrows = document.querySelectorAll('.pagination-arrow');
+      
+      paginationItems.forEach(item => {
+        item.addEventListener('click', function() {
+          // Remove active class from all pagination items
+          paginationItems.forEach(item => item.classList.remove('active'));
+          
+          // Add active class to clicked item
+          this.classList.add('active');
+          
+          // Enable/disable pagination arrows
+          if (this.textContent === '1') {
+            paginationArrows[0].classList.add('disabled');
+          } else {
+            paginationArrows[0].classList.remove('disabled');
+          }
+          
+          if (this.textContent === '3') {
+            paginationArrows[1].classList.add('disabled');
+          } else {
+            paginationArrows[1].classList.remove('disabled');
+          }
+          
+          // Scroll to top of news section
+          window.scrollTo({
+            top: document.querySelector('.news-container').offsetTop - 100,
+            behavior: 'smooth'
+          });
+        });
+      });
+      
+      // Search Form (Placeholder)
+      const searchForm = document.querySelector('.search-form');
+      
+      searchForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const searchInput = this.querySelector('.search-input').value.trim();
+        
+        if (searchInput) {
+          console.log('Searching for:', searchInput);
+          
+          // Display search notification
+          alert(`Search functionality would search for: "${searchInput}"`);
+        }
+      });
+      
+      // Categories and Tags (Placeholder)
+      const categoryLinks = document.querySelectorAll('.categories-item a');
+      const tagLinks = document.querySelectorAll('.tag-item');
+      
+      categoryLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const category = this.querySelector('span').textContent;
+          alert(`Would filter news by category: ${category}`);
+        });
+      });
+      
+      tagLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          const tag = this.textContent;
+          alert(`Would filter news by tag: ${tag}`);
+        });
+      });
+    });
+  </script>
+</body>
+</html> 
