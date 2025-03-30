@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Về chúng tôi | ALVIE International</title>
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Additional styles specific to About page */
+        .about-hero {
+            height: 50vh;
+            background-image: linear-gradient(rgba(14, 48, 14, 0.7), rgba(14, 48, 14, 0.7)), url('../images/about-hero.jpg');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            color: var(--pure-white);
+            margin-top: 110px;
+        }
+
+        .mission-vision-section {
+            padding: var(--spacing-xxl) 0;
+        }
+
+        .mission-vision-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--spacing-xl);
+        }
+
+        .mission-box, .vision-box {
+            padding: var(--spacing-xl);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-md);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-box {
+            background-color: var(--light-grey-1);
+        }
+
+        .mission-box h2, .vision-box h2 {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-lg);
+            position: relative;
+        }
+
+        .mission-box h2::after, .vision-box h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 80px;
+            height: 3px;
+            background-color: var(--alvie-green);
+        }
+
+        .vision-box {
+            background-color: var(--professional-green);
+            color: var(--pure-white);
+        }
+
+        .vision-box h2::after {
+            background-color: var(--pure-white);
+        }
+
+        .history-section {
+            background-color: var(--light-grey-1);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: var(--spacing-lg) 0;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: 4px;
+            background-color: var(--alvie-green);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            padding: var(--spacing-md) 0;
+            position: relative;
+        }
+
+        .timeline-content {
+            position: relative;
+            width: 45%;
+            padding: var(--spacing-md);
+            background-color: var(--pure-white);
+            border-radius: var(--border-radius-md);
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background-color: var(--pure-white);
+            border-radius: 50%;
+            box-shadow: var(--shadow-sm);
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -30px;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -30px;
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--alvie-green);
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .team-section {
+            padding: var(--spacing-xxl) 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: var(--spacing-xl);
+        }
+
+        .team-member {
+            text-align: center;
+            border-radius: var(--border-radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: all var(--transition-speed) ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .member-image {
+            height: 250px;
+            overflow: hidden;
+        }
+
+        .member-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .member-info {
+            padding: var(--spacing-md);
+            background-color: var(--pure-white);
+        }
+
+        .member-info h3 {
+            font-size: 1.2rem;
+            color: var(--deep-forest);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .member-info p {
+            color: var(--alvie-green);
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .member-social {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-xs);
+        }
+
+        .member-social a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            background-color: var(--light-grey-1);
+            color: var(--deep-forest);
+            border-radius: 50%;
+            transition: all var(--transition-speed) ease;
+        }
+
+        .member-social a:hover {
+            background-color: var(--alvie-green);
+            color: var(--pure-white);
+        }
+
+        @media (max-width: 768px) {
+            .mission-vision-container {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline::after {
+                left: 30px;
+            }
+
+            .timeline-content {
+                width: 80%;
+                margin-left: 60px !important;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="main-header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <span><i class="fas fa-phone"></i> 0983.157.199</span>
+                    <span><i class="fas fa-envelope"></i> fubi@gmail.com</span>
+                </div>
+                <div class="header-right">
+                    <a href="#" class="btn-login">Đăng nhập</a>
+                    <div class="language-selector">
+                        <a href="#" class="active">VN</a>
+                        <a href="#">EN</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="main-nav">
+            <div class="container">
+                <a href="../index.html" class="logo">
+                    <img src="../images/alvie-logo.png" alt="ALVIE International">
+                </a>
+
+                <nav>
+                    <ul class="primary-menu">
+                        <li class="active"><a href="about.html">Về chúng tôi</a></li>
+                        <li class="menu-item-has-children">
+                            <a href="services.html">Dịch vụ</a>
+                            <ul class="submenu">
+                                <li><a href="investment.html">Tư vấn đầu tư</a></li>
+                                <li><a href="events.html">Tổ chức sự kiện</a></li>
+                                <li><a href="minimart.html">Minimart</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="projects.html">Dự án</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="nav-tools">
+                    <a href="#" class="search-toggle"><i class="fas fa-search"></i></a>
+                    <a href="#" class="mobile-menu-toggle"><i class="fas fa-bars"></i></a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="about-hero">
+        <div class="container">
+            <h1>Về chúng tôi</h1>
+            <p>Khám phá câu chuyện, sứ mệnh và tầm nhìn của ALVIE International</p>
+        </div>
+    </section>
+
+    <!-- Mission & Vision Section -->
+    <section class="mission-vision-section">
+        <div class="container">
+            <div class="mission-vision-container">
+                <div class="mission-box">
+                    <h2>Sứ mệnh</h2>
+                    <p>"Nâng tầm giá trị con người trong công việc"</p>
+                    <p>Tại ALVIE, chúng tôi tin rằng con người là tài sản quý giá nhất. Sứ mệnh của chúng tôi là tạo ra một môi trường làm việc lý tưởng, nơi mỗi cá nhân đều được tôn trọng, được trao quyền và có cơ hội phát triển. Từ đó, chúng tôi có thể mang đến những giá trị thiết thực nhất cho khách hàng và đối tác của mình.</p>
+                    <p>Chúng tôi cam kết xây dựng một không gian làm việc nơi giao tiếp tích cực, không có sự căng thẳng hay nóng nảy, mà thay vào đó là sự lắng nghe, thấu hiểu và minh bạch.</p>
+                    <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" class="video-link"><i class="fas fa-play-circle"></i> Xem video về sứ mệnh</a>
+                </div>
+                <div class="vision-box">
+                    <h2>Tầm nhìn</h2>
+                    <p>"Trở thành công ty có môi trường làm việc tốt nhất Việt Nam để mang lại những giá trị thiết thực nhất cho khách hàng"</p>
+                    <p>ALVIE hướng đến việc trở thành hình mẫu về môi trường làm việc lý tưởng tại Việt Nam. Chúng tôi tin rằng khi nhân viên hạnh phúc và được trao quyền, họ sẽ mang đến những dịch vụ xuất sắc và trải nghiệm tuyệt vời cho khách hàng.</p>
+                    <p>Chúng tôi không chỉ muốn thành công về mặt kinh doanh, mà còn muốn tạo ra một tác động tích cực đến cộng đồng và xã hội thông qua các hoạt động của mình.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="stats-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>ALVIE trong con số</h2>
+                <p>Những con số ấn tượng từ hành trình phát triển của chúng tôi</p>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="counter-number" data-target="50">0</div>
+                    <div class="stat-label">Dự án thành công</div>
+                </div>
+                <div class="stat-item">
+                    <div class="counter-number" data-target="100">0</div>
+                    <div class="stat-label">Khách hàng hài lòng</div>
+                </div>
+                <div class="stat-item">
+                    <div class="counter-number" data-target="25">0</div>
+                    <div class="stat-label">Chuyên gia tư vấn</div>
+                </div>
+                <div class="stat-item">
+                    <div class="counter-number" data-target="10">0</div>
+                    <div class="stat-label">Năm kinh nghiệm</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Core Values Section -->
+    <section class="values-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Giá trị cốt lõi</h2>
+                <p>5 giá trị nền tảng định hình mọi hoạt động của ALVIE</p>
+            </div>
+
+            <div class="values-grid">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Action</h3>
+                    <p>Hành động tạo ra kết quả. Chúng tôi không chỉ dừng lại ở ý tưởng, mà còn biến chúng thành hiện thực. Chúng tôi chủ động, quyết đoán và không ngần ngại đương đầu với thử thách.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>Love</h3>
+                    <p>Những lời xuất phát từ trái tim sẽ đến với trái tim. Chúng tôi xây dựng môi trường làm việc như một gia đình, nơi mọi người quan tâm, chia sẻ và hỗ trợ lẫn nhau.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>Valuation</h3>
+                    <p>Mỗi cá nhân được đánh giá dựa trên năng lực thực tế, không thiên vị, không phân biệt đối xử. Chúng tôi trân trọng và công nhận đóng góp của từng người.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h3>Innovation</h3>
+                    <p>Chúng tôi luôn cập nhật những công nghệ, kiến thức mới nhất để ứng dụng vào công việc. Sự sáng tạo và đổi mới là động lực giúp chúng tôi phát triển không ngừng.</p>
+                </div>
+
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>Empowerment</h3>
+                    <p>Chúng tôi tin tưởng vào khả năng của nhân viên và trao cho họ quyền tự chủ trong công việc. Khi được trao quyền, mỗi cá nhân sẽ phát huy tối đa tiềm năng của mình.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company History -->
+    <section class="history-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Lịch sử phát triển</h2>
+                <p>Hành trình phát triển của ALVIE International</p>
+            </div>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025</div>
+                        <h3>ALVIE International ra đời</h3>
+                        <p>ALVIE International Company Limited chính thức được thành lập với sứ mệnh "Nâng tầm giá trị con người trong công việc".</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025</div>
+                        <h3>Khởi động dịch vụ tư vấn đầu tư</h3>
+                        <p>ALVIE triển khai dịch vụ tư vấn đầu tư, tập trung vào Khu Công Nghệ Cao Đà Nẵng và các dự án phát triển tại miền Trung.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025</div>
+                        <h3>Mở rộng sang tổ chức sự kiện</h3>
+                        <p>ALVIE phát triển mảng tổ chức sự kiện, tập trung vào các sự kiện doanh nghiệp, hội nghị, hội thảo và hoạt động team building.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2026</div>
+                        <h3>Ra mắt hệ thống Minimart</h3>
+                        <p>ALVIE mở rộng sang lĩnh vực bán lẻ với việc khai trương chuỗi cửa hàng tiện lợi đầu tiên tại Đà Nẵng.</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">2026</div>
+                        <h3>Tương lai</h3>
+                        <p>ALVIE tiếp tục mở rộng hoạt động kinh doanh, phát triển đội ngũ và nâng cao chất lượng dịch vụ, hướng đến mục tiêu trở thành một trong những công ty có môi trường làm việc tốt nhất Việt Nam.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Đội ngũ của chúng tôi</h2>
+                <p>Những con người tài năng và nhiệt huyết tạo nên ALVIE</p>
+            </div>
+
+            <div class="team-grid">
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../images/team-member1.jpg" alt="Nguyễn Phú Bình">
+                    </div>
+                    <div class="member-info">
+                        <h3>Nguyễn Phú Bình</h3>
+                        <p>Tổng Giám đốc</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../images/team-member2.jpg" alt="Nguyễn Thị Mai">
+                    </div>
+                    <div class="member-info">
+                        <h3>Nguyễn Thị Mai</h3>
+                        <p>Giám đốc Tài chính</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../images/team-member3.jpg" alt="Trần Văn Hùng">
+                    </div>
+                    <div class="member-info">
+                        <h3>Trần Văn Hùng</h3>
+                        <p>Giám đốc Dự án</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="team-member">
+                    <div class="member-image">
+                        <img src="../images/team-member4.jpg" alt="Lê Thị Hoài">
+                    </div>
+                    <div class="member-info">
+                        <h3>Lê Thị Hoài</h3>
+                        <p>Giám đốc Marketing</p>
+                        <div class="member-social">
+                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#"><i class="fab fa-twitter"></i></a>
+                            <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-top">
+                <div class="footer-column">
+                    <h3>Về ALVIE</h3>
+                    <img src="../images/alvie-emblem.png" alt="ALVIE Emblem" class="footer-emblem" style="width: 60px; margin-bottom: 15px;">
+                    <p>ALVIE International là đối tác chiến lược duy nhất tại Đà Nẵng cung cấp giải pháp toàn diện và sáng tạo trong các lĩnh vực xúc tiến đầu tư, tổ chức sự kiện và thương mại.</p>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Liên hệ</h3>
+                    <address>
+                        <p><i class="fas fa-map-marker-alt"></i> K132/17 Lý Tự Trọng, Phường Thuận Phước, Quận Hải Châu, Thành phố Đà Nẵng, Việt Nam</p>
+                        <p><i class="fas fa-phone"></i> 0983.157.199</p>
+                        <p><i class="fas fa-envelope"></i> fubi@gmail.com</p>
+                    </address>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Liên kết nhanh</h3>
+                    <ul class="footer-links">
+                        <li><a href="about.html">Về chúng tôi</a></li>
+                        <li><a href="services.html">Dịch vụ</a></li>
+                        <li><a href="projects.html">Dự án</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Theo dõi chúng tôi</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                    <div class="newsletter">
+                        <h4>Đăng ký nhận bản tin</h4>
+                        <form>
+                            <input type="email" placeholder="Email của bạn">
+                            <button type="submit">Đăng ký</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 ALVIE International Company Limited. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="../js/main.js"></script>
+</body>
+</html> 

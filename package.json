@@ -1,0 +1,21 @@
+{
+  "name": "alvie-website",
+  "version": "1.0.0",
+  "description": "ALVIE International Company Limited Website",
+  "main": "index.js",
+  "scripts": {
+    "dev": "http-server ./alvie-website -p 8000",
+    "start": "http-server ./alvie-website -p 8000"
+  },
+  "keywords": [
+    "alvie",
+    "investment",
+    "events",
+    "minimart"
+  ],
+  "author": "ALVIE International",
+  "license": "ISC",
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  }
+} 

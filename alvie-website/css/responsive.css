@@ -1,0 +1,234 @@
+/* ALVIE Responsive CSS */
+
+/* Large devices (desktops, less than 1200px) */
+@media (max-width: 1199.98px) {
+    .container {
+        max-width: 960px;
+    }
+    
+    .hero-title {
+        font-size: 4rem;
+    }
+    
+    .services-preview {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Medium devices (tablets, less than 992px) */
+@media (max-width: 991.98px) {
+    .container {
+        max-width: 720px;
+    }
+    
+    h1 {
+        font-size: 3rem;
+    }
+    
+    h2 {
+        font-size: 2.25rem;
+    }
+    
+    .hero-title {
+        font-size: 3.5rem;
+    }
+    
+    .main-nav {
+        display: none;
+    }
+    
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    .mobile-menu-open .main-nav {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: var(--pure-white);
+        z-index: 1000;
+        padding: var(--spacing-xxl);
+    }
+    
+    .mobile-menu-open .nav-list {
+        flex-direction: column;
+        align-items: center;
+        gap: var(--spacing-lg);
+    }
+    
+    .mobile-menu-open .nav-link {
+        font-size: 1.5rem;
+    }
+    
+    .services-preview {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    
+    .cta-section {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-links {
+        grid-template-columns: repeat(2, 1fr);
+        row-gap: var(--spacing-xl);
+    }
+}
+
+/* Small devices (landscape phones, less than 768px) */
+@media (max-width: 767.98px) {
+    .container {
+        max-width: 540px;
+    }
+    
+    .top-nav-left, .top-nav-right {
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+    }
+    
+    .hero-section {
+        height: 50vh;
+    }
+    
+    .hero-content {
+        padding: 0 var(--spacing-lg);
+    }
+    
+    .hero-title {
+        font-size: 3rem;
+    }
+    
+    .contact-links {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        text-align: center;
+    }
+    
+    .legal-links {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+        align-items: center;
+    }
+}
+
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+    html {
+        font-size: 14px;
+    }
+    
+    .container {
+        width: 100%;
+        padding: 0 var(--spacing-md);
+    }
+    
+    .top-nav {
+        display: none;
+    }
+    
+    .hero-content {
+        padding: 0 var(--spacing-md);
+        width: 100%;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .intro-section {
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    .service-card {
+        height: 300px;
+    }
+    
+    .values-section {
+        padding: var(--spacing-xl) 0;
+    }
+    
+    .value-card {
+        padding: var(--spacing-lg);
+    }
+    
+    .cta-content {
+        padding: var(--spacing-xl);
+    }
+    
+    .footer-links {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* For very small screens */
+@media (max-width: 359.98px) {
+    html {
+        font-size: 12px;
+    }
+    
+    .logo img {
+        height: 40px;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+}
+
+/* Additional responsive styles for existing ALVIE website */
+@media (max-width: 991.98px) {
+    .primary-menu {
+        display: none;
+    }
+    
+    .primary-menu.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--pure-white);
+        box-shadow: var(--shadow-md);
+        padding: var(--spacing-md);
+        z-index: 10;
+    }
+    
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .about-content {
+        flex-direction: column;
+    }
+    
+    .values-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 767.98px) {
+    .values-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-top {
+        grid-template-columns: 1fr;
+        gap: var(--spacing-xl);
+    }
+} 
